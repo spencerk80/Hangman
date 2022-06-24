@@ -23,6 +23,7 @@ public class GuessLetterPrompt implements Prompt {
         scanner = new Scanner(System.in);
 
         //Print out the progress on the blank word
+        System.out.print("Secret word: ");
         blankWord.chars().forEach(c -> System.out.printf("%c ", c));
         System.out.println("\n");
 
