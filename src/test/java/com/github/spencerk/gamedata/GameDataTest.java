@@ -176,6 +176,33 @@ public class GameDataTest {
     }
 
     @Test
+    public void oneLetterToManyBlanks() {
+        boolean result;
+        List<Character> attempts = gameData.getAttempts();
+
+        secret = "sleeplessness";
+        setSecret();
+        result = gameData.makeAttempt('e');
+
+        assertTrue(result);
+        assertTrue(gameData.getNumBadGuesses() == 0);
+        assertTrue( ! gameData.gameWon());
+        assertTrue(attempts.size() == 0);
+        assertTrue(gameData.getBlankWord().equals("__ee__e___e__"));
+
+        result = gameData.makeAttempt('s');
+
+        assertTrue(result);
+        assertTrue(gameData.getNumBadGuesses() == 0);
+        assertTrue( ! gameData.gameWon());
+        assertTrue(attempts.size() == 0);
+        assertTrue(gameData.getBlankWord().equals("s_ee__ess_ess"));
+
+        //Restore for other tests
+        secret = "fox";
+    }
+
+    @Test
     public void solveWord() {
         boolean result;
         List<Character> attempts = gameData.getAttempts();
