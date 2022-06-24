@@ -9,7 +9,8 @@ public class GameData {
     private Random          random      = null;
     private String[]        secretWords = { "cat", "dog", "person", "fox", "pokemon", "hamburger", "computer", "java",
                                             "javascript", "typescript", "react", "enchilada", "cellphone", "cup",
-                                            "bottle", "horse", "pony", "game", "apple", "banana", "bread", "pizza" };
+                                            "bottle", "horse", "pony", "game", "apple", "banana", "bread", "pizza",
+                                            "hippopotomonstrosesquippedaliophobia"}; //Yes it's a real word
     private String          secret      = "",
                             blankWord   = "";
     private List<Character> attempts    = null;
