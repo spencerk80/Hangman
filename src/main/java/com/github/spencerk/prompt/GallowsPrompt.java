@@ -1,9 +1,11 @@
 package com.github.spencerk.prompt;
 
 import com.github.spencerk.gamedata.GameData;
+import com.github.spencerk.util.Console;
 
 public class GallowsPrompt implements Prompt {
     public Prompt run() {
+
         switch(GameData.data().getNumBadGuesses()) {
             case 0:
                 System.out.println("          ==========   ");

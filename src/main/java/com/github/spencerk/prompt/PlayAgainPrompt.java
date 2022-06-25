@@ -1,6 +1,7 @@
 package com.github.spencerk.prompt;
 
 import com.github.spencerk.gamedata.GameData;
+import com.github.spencerk.util.Console;
 
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class PlayAgainPrompt implements Prompt {
 
         if("yes".equals(response)) {
             GameData.data().reset();
+            Console.clearScreen();
             return PromptFactory.getNewGamePrompt();
         }
         return null;

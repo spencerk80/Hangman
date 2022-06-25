@@ -1,6 +1,7 @@
 package com.github.spencerk.prompt;
 
 import com.github.spencerk.gamedata.GameData;
+import com.github.spencerk.util.Console;
 
 import java.util.List;
 import java.util.Scanner;
@@ -58,6 +59,7 @@ public class GuessLetterPrompt implements Prompt {
         }
 
         //Game continues
+        Console.clearScreen();
         return PromptFactory.getGallowsPrompt();
 
     }
