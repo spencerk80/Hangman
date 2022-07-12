@@ -39,7 +39,7 @@ public class GetPlayerNamePromptTest {
         PromptFactory.getGetPlayerNamePrompt().run();
 
         //Prompt will just ask again
-        assertEquals("Enter your character's name: ", TEST_OUT.toString().split("\n")[1]);
+        assertEquals("Enter your name: ", TEST_OUT.toString().split("\n")[1]);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class GetPlayerNamePromptTest {
 
         //Prompt should just ask again
         assertEquals("Kris. Are you sure that's your name?(y/n): ", TEST_OUT.toString().split("\n")[1]);
-        assertEquals("Enter your character's name: ", TEST_OUT.toString().split("\n")[2]);
+        assertEquals("Enter your name: ", TEST_OUT.toString().split("\n")[2]);
         assertEquals(
                 "Kristoffer. Are you sure that's your name?(y/n): ",
                 TEST_OUT.toString().split("\n")[3]

@@ -1,6 +1,7 @@
 package com.github.spencerk.prompt;
 
 import com.github.spencerk.gamedata.GameData;
+import com.github.spencerk.util.Console;
 
 import java.util.Scanner;
 
@@ -30,6 +31,8 @@ public class GetPlayerNamePrompt implements Prompt {
         } while(input != 'y');
 
         GameData.data().setPlayerName(name);
+
+        Console.clearScreen();
         return PromptFactory.getGallowsPrompt();
     }
 }

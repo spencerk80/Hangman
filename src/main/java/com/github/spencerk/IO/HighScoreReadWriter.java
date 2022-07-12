@@ -30,7 +30,7 @@ public class HighScoreReadWriter {
         String      data        = null;
 
         //File may not exist
-        if( ! file.exists()) return "";
+        if( ! file.exists()) return "No record is set.";
 
         try {
             scanner = new Scanner(file);
