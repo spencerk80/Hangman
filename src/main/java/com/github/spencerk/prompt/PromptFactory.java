@@ -5,6 +5,7 @@ public class PromptFactory {
     private static NewGamePrompt    newGamePrompt;
     private static PlayAgainPrompt  playAgainPrompt;
     private static GuessLetterPrompt guessLetterPrompt;
+    private static GetPlayerNamePrompt getPlayerNamePrompt;
 
     public static GallowsPrompt getGallowsPrompt() {
         if(gallowsPrompt == null) gallowsPrompt = new GallowsPrompt();
@@ -24,5 +25,10 @@ public class PromptFactory {
     public static GuessLetterPrompt getGuessLetterPrompt() {
         if(guessLetterPrompt == null) guessLetterPrompt = new GuessLetterPrompt();
         return guessLetterPrompt;
+    }
+
+    public static GetPlayerNamePrompt getGetPlayerNamePrompt() {
+        if(getPlayerNamePrompt == null) getPlayerNamePrompt = new GetPlayerNamePrompt();
+        return getPlayerNamePrompt;
     }
 }

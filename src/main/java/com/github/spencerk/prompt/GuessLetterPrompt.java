@@ -1,5 +1,6 @@
 package com.github.spencerk.prompt;
 
+import com.github.spencerk.IO.HighScoreReadWriter;
 import com.github.spencerk.gamedata.GameData;
 import com.github.spencerk.util.Console;
 
@@ -55,6 +56,11 @@ public class GuessLetterPrompt implements Prompt {
         if(GameData.data().gameWon()) { //Game won
             System.out.println(GameData.data().getBlankWord());
             System.out.println("You did it! You've guessed it right!");
+
+            if(HighScoreReadWriter.getInstance().writeSaveRecord()) {
+                System.out.println("That's a new record! Your score has been saved.");
+            }
+
             return PromptFactory.getPlayAgainPrompt();
         }
 
