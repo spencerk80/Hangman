@@ -12,13 +12,14 @@ import static java.util.stream.Collectors.toList;
 
 public class GameData {
 
-    private Random          random      = null;
-    private String[]        secretWords = { "cat", "dog", "person", "fox", "pokemon", "hamburger", "computer", "java",
+    private final Random    random;
+    private final String[]  secretWords = { "cat", "dog", "person", "fox", "pokemon", "hamburger", "computer", "java",
                                             "javascript", "typescript", "react", "enchilada", "cellphone", "cup",
                                             "bottle", "horse", "pony", "game", "apple", "banana", "bread", "pizza",
                                             "hippopotomonstrosesquippedaliophobia"}; //Yes it's a real word
     private String          secret      = "",
-                            blankWord   = "";
+                            blankWord   = "",
+                            playerName  = "";
     private List<Character> attempts    = null;
     private byte            numBadGuesses = 0;
     private static GameData instance    = null;
@@ -59,8 +60,7 @@ public class GameData {
 
     //Check whether win condition is met i.e. the word has no blanks
     public boolean gameWon() {
-        if(blankWord.indexOf('_') >= 0) return false;
-        return true;
+        return blankWord.indexOf('_') < 0;
     }
 
     //Set up the data for a new game
@@ -138,6 +138,9 @@ public class GameData {
     public String getBlankWord() {
         return blankWord;
     }
+
+    public String getPlayerName() { return playerName; }
+    public void setPlayerName(String playerName) { this.playerName = playerName; }
 
     public List<Character> getAttempts() {
         return attempts;

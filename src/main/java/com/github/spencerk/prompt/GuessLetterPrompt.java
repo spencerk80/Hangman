@@ -12,7 +12,7 @@ public class GuessLetterPrompt implements Prompt {
     public Prompt run() {
         List<Character> incorrectLetters    = GameData.data().getAttempts();
         String          blankWord           = GameData.data().getBlankWord();
-        char            guess               = ' ';
+        char            guess;
 
         //After gallows prints, check to see if game is over
         if(GameData.data().getNumBadGuesses() == 6) {
@@ -39,10 +39,10 @@ public class GuessLetterPrompt implements Prompt {
             guess = scanner.nextLine().trim().toLowerCase().charAt(0);
             System.out.println();
 
-            if(incorrectLetters.indexOf(guess) >= 0) System.out.printf("You've already guessed %c. Try again.%n", guess);
+            if(incorrectLetters.contains(guess)) System.out.printf("You've already guessed %c. Try again.%n", guess);
         } while(
                 !(guess + "").matches("[a-z]|1")
-                || incorrectLetters.indexOf(guess) >= 0
+                || incorrectLetters.contains(guess)
         );
 
         //Mostly as a way to make testing easier
