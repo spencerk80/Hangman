@@ -1,8 +1,14 @@
 package com.github.spencerk.gamedata;
 
+import one.util.streamex.EntryStream;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class GameData {
 
@@ -59,13 +65,16 @@ public class GameData {
 
     //Set up the data for a new game
     public void reset() {
-        StringBuilder sb = new StringBuilder("");
-
+//        StringBuilder sb = new StringBuilder("");
+//
         secret = secretWords[random.nextInt(secretWords.length)];
+//
+//        for(int i = 0; i < secret.length(); i++) sb.append('_');
+//
+//        blankWord = sb.toString();
 
-        for(int i = 0; i < secret.length(); i++) sb.append('_');
+        blankWord = secret.chars().boxed().map(c -> '_').map(Object::toString).collect(Collectors.joining());
 
-        blankWord = sb.toString();
         attempts = new ArrayList<>();
         numBadGuesses = 0;
     }
@@ -75,29 +84,51 @@ public class GameData {
      *------------------------------------------------------------*/
 
     private boolean addLetterToBlank(char c) {
-        byte    occurrences = (byte) secret.chars().filter(l -> l == c).count(),
-                index       = 0;
-        byte[]  indices     = null;
-        char[]  blanks      = null;
 
-        //The guessed letter isn't in the secret
-        if(occurrences == 0) return false;
+        //I am not a fan of this solution. It's way more CPU heavy and mem heavy. But it satisfies the new requirements
 
-        //Make space to hold the indices of the occurring guess letter
-        indices = new byte[occurrences];
-        //Find the indices
-        for(byte i = 0; i < secret.length(); i++)
-            if(secret.charAt(i) == c)
-                indices[index++] = i;
+        //Get indices of the letter occurring in the secret word
+        List<Integer> indices = IntStream.range(0, secret.length())
+                .filter(i -> secret.charAt(i) == c)
+                .boxed()
+                .collect(toList());
 
-        //Prepare blanks for letter replacement
-        blanks = blankWord.toCharArray();
+        //Check whether the letter is in the word
+        if(indices.size() == 0) return false;
 
-        //Replace blanks with the letter
-        for(byte i : indices) blanks[i] = c;
-        blankWord = String.valueOf(blanks);
+        //Insert letter at the indices
+        blankWord = EntryStream.of(blankWord.chars()
+                        .boxed()
+                        .collect(toList()))
+                .mapKeyValue((i,ch) -> indices.contains(i) ? c : ch)
+                .map(ch -> String.format("%c", ch))
+                .collect(Collectors.joining());
 
         return true;
+
+//        byte    occurrences = (byte) secret.chars().filter(l -> l == c).count(),
+//                index       = 0;
+//        byte[]  indices     = null;
+//        char[]  blanks      = null;
+//
+//        //The guessed letter isn't in the secret
+//        if(occurrences == 0) return false;
+//
+//        //Make space to hold the indices of the occurring guess letter
+//        indices = new byte[occurrences];
+//        //Find the indices
+//        for(byte i = 0; i < secret.length(); i++)
+//            if(secret.charAt(i) == c)
+//                indices[index++] = i;
+//
+//        //Prepare blanks for letter replacement
+//        blanks = blankWord.toCharArray();
+//
+//        //Replace blanks with the letter
+//        for(byte i : indices) blanks[i] = c;
+//        blankWord = String.valueOf(blanks);
+//
+//        return true;
     }
 
     /*------------------------------------------------------------*
